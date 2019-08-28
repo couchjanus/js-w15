@@ -1,0 +1,35 @@
+{
+  "name": "js-w15",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "parcel ./src/index.html",
+    "dev": "parcel ./src/test.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/couchjanus/js-w15.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/couchjanus/js-w15/issues"
+  },
+  "homepage": "https://github.com/couchjanus/js-w15#readme",
+  "devDependencies": {
+    "eslint": "^6.2.2",
+    "eslint-plugin-prettier": "^3.1.0",
+    "jshint": "^2.10.2",
+    "lint-staged": "^9.2.5",
+    "prettier": "^1.18.2",
+    "sass": "^1.22.10"
+  },
+  "dependencies": {
+    "bootstrap": "^4.3.1",
+    "jquery": "^3.4.1",
+    "popper.js": "^1.14.7"
+  }
+}
