@@ -1,10 +1,4 @@
-// let allButtons = document.getElementsByTagName('button');
-
-let allButtons = document.querySelectorAll('button');
-
-console.log(allButtons);
-
-let display = document.querySelector('.viewer');
+let display = document.getElementById('viewer');
 
 let leftOperand, 
     operation,
@@ -35,5 +29,5 @@ let leftOperand,
         sum = parseInt(leftOperand) + parseInt(rightOperand);
         console.log(sum);
         }
-        display.innerText  = sum;
+        display.textContent  = sum;
     }
