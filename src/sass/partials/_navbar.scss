@@ -1,0 +1,143 @@
+.navbar {
+    padding: 15px 10px;
+    background: #fff;
+    border: none;
+    border-radius: 0;
+    box-shadow: $shadow;
+}
+
+.navbar-btn {
+    box-shadow: none;
+    outline: none !important;
+    border: none;
+}
+
+/* ---------------------------------------------------
+    SIDEBAR STYLE
+----------------------------------------------------- */
+
+.sidebar {
+    width: 250px;
+    position: fixed;
+    top: 0;
+    right: -100%;
+    height: 100vh;
+    z-index: 999;
+    background: $sidebar-bg;
+    color: #fff;
+    transition: all 0.3s;
+    overflow-y: scroll;
+    box-shadow: $shadow-sb;
+
+    & .sidebar-header {
+        padding: 20px;
+        background: $sidebar-header-bg;
+    }
+    
+    & ul.components {
+        padding: 20px 0;
+        border-bottom: 1px solid #47748b;
+    }
+    
+    & ul p {
+        color: #fff;
+        padding: 10px;
+    }
+    
+    & ul li a {
+        padding: 10px;
+        font-size: 1.1em;
+        display: block;
+        &:hover {
+            color: $sidebar-bg;
+            background: #fff;
+        }
+    }
+    
+    & ul li.active>a,
+    a[aria-expanded="true"] {
+        color: #fff;
+        background: $sidebar-header-bg;
+    }
+
+}
+
+.sidebar.active {
+    right: 0;
+}
+
+.dismiss {
+    width: 35px;
+    height: 35px;
+    line-height: 35px;
+    text-align: center;
+    background: $sidebar-bg;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    -webkit-transition: all 0.3s;
+    -o-transition: all 0.3s;
+    transition: all 0.3s;
+
+    &:hover {
+        background: #fff;
+        color: $sidebar-bg;
+    }
+}
+
+.overlay {
+    display: none;
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 998;
+    opacity: 0;
+    transition: all 0.5s ease-in-out;
+}
+.overlay.active {
+    display: block;
+    opacity: 1;
+}
+
+a[data-toggle="collapse"] {
+    position: relative;
+}
+
+.dropdown-toggle::after {
+    display: block;
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
+}
+
+ul ul a {
+    font-size: 0.9em !important;
+    padding-left: 30px !important;
+    background: $sidebar-header-bg;
+}
+
+ul.checkout {
+    padding: 20px;
+    & a {
+        text-align: center;
+        font-size: 0.9em !important;
+        display: block;
+        border-radius: 5px;
+        margin-bottom: 5px;
+    }
+}
+
+
+a.check-out {
+    background: #fff;
+    color: $sidebar-bg;
+}
+
+a.article,
+a.article:hover {
+    background: $sidebar-header-bg !important;
+    color: #fff !important;
+}

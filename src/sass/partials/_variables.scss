@@ -2,7 +2,8 @@
 
 $body-bg: #eee;
 $body-color: #111;
-
+$sidebar-bg: #025a1ff1;
+$sidebar-header-bg: #04812ef1;
 $theme-colors: (
   "primary": #025a1ff1,
   "danger": #ff4136,
@@ -12,4 +13,6 @@ $theme-colors: (
 $border-side: 1px solid #e5e5e5;
 // $enable-shadows: 1;
 $enable-border-radius: 1;
-$shadow: 0 .25rem .75rem rgba(3, 1, 1, 0.5);
+$shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+
+$shadow-sb: 3px 3px 3px rgba(0, 0, 0, 0.2);

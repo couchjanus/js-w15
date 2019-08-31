@@ -1,17 +1,201 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>My Project</title>
+  <link href="sass/main.scss" rel="stylesheet" />
+
+  <style>
+    #elem {
+      font-style: italic;
+    }
+    .pink {
+      background-color: pink;
+      border: 2px solid saddlebrown;
+    }
+  </style>
 </head>
-
 <body>
-    <h1>Hello JavaScript!</h1>
+  <div class="wrapper" id="main">
+    <!-- Sidebar  -->
+    <nav id="sidebar" class="sidebar">
+      <div id="dismiss" class="dismiss">
+          <i class="fas fa-arrow-right"></i>
+      </div>
 
-    <script src="./js/index.js"></script>
+      <div class="sidebar-header">
+          <h3>Cart</h3>
+      </div>
+
+      <ul class="list-unstyled components">
+         
+          <li class="active">
+              <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false">Products</a>
+              <ul class="collapse list-unstyled" id="homeSubmenu">
+                  <li>
+                      <a href="#">Product 1</a>
+                  </li>
+                  <li>
+                      <a href="#">Product 2</a>
+                  </li>
+                  <li>
+                      <a href="#">Product 3</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+              <a href="#">Product</a>
+              <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false">Products</a>
+              <ul class="collapse list-unstyled" id="pageSubmenu">
+                  <li>
+                      <a href="#">Page 1</a>
+                  </li>
+                  <li>
+                      <a href="#">Page 2</a>
+                  </li>
+                  <li>
+                      <a href="#">Page 3</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+              <a href="#">Product</a>
+          </li>
+          <li>
+              <a href="#">Product</a>
+          </li>
+      </ul>
+
+      <ul class="list-unstyled checkout">
+          <li>
+              <a href="#" class="check-out">Checkout</a>
+          </li>
+          <li>
+              <a href="#" class="article">Continue Shopping</a>
+          </li>
+      </ul>
+    </nav>
+    <!-- Page Content  -->
+    <div id="content">
+      <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+            <div class="container-fluid">
+                <button type="button" class="btn btn-primary">
+                    <span>Peculiar Shopaholic</span>
+                </button>
+                
+                <button class="btn btn-primary d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <i class="fas fa-align-justify"></i>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="nav navbar-nav ml-auto">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="#">Page</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Page</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Page</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Page</a>
+                        </li>
+                    </ul>
+                </div>
+                <button type="button" id="sidebarCollapse" class="btn btn-primary">
+                    <i class="fas fa-align-left"></i>
+                    <span><i class="fas fa-shopping-cart"></i></span>
+                </button>
+            </div>
+      </nav>
+      
+      <div class="album py-5 bg-light">
+        <h1>See ya Cats!</h1>
+        <hr>
+        <span id="elem">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloribus necessitatibus corrupti eius deleniti aspernatur, facilis totam assumenda amet laudantium maxime debitis. Sit tenetur ipsam odio voluptates voluptatem tempore dolores excepturi? dolor sit amet consectetur adipisicing elit. Repudiandae esse omnis corporis, assumenda ipsam optio quaerat deserunt animi laudantium, aspernatur non. Beatae impedit sit libero</span>
+        <hr>
+
+        <span>dolor sit amet consectetur adipisicing</span> elit. Repudiandae esse omnis corporis, assumenda ipsam optio quaerat deserunt animi laudantium, <span>aspernatur non. Beatae impedit sit libero</span>
+
+        <div class="container">
+            <input value="Нажми меня" id="touch-me" type="button">
+        </div>
+
+        <p id="el">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Facilis, unde id laborum ad consequatur, similique aliquid doloremque laudantium, inventore molestiae minus ratione omnis tempora nostrum provident! Officiis facere odio quaerat.</p>
+
+
+        <p>Lorem ipsum, <span>dolor sit amet consectetur adipisicing</span> elit. Repudiandae esse omnis corporis, assumenda ipsam optio quaerat deserunt animi laudantium, <span>aspernatur non. Beatae impedit sit libero</span> ex ad molestiae deserunt vel?</p>
+
+        <button class="btn">Button</button>
+
+        <div class='filter'>
+          <li>Item 1</li>
+          <li>Item 2</li>
+          <li>Item 3</li>
+          <li>Item 4</li>
+          <li>Item 5</li>
+        </div>
+
+        <div class="title">
+            <p>Product name</p>
+            <div class="amount">
+              <button class="adding minus" title="Open"><i class="fas fa-minus-circle"></i></button>
+              <span class="adding">1</span>
+              <button class="adding plus" title="Add"><i class="fas fa-plus-circle"></i></button>
+              <span class="price">$00.00</span>
+            </div>
+        </div>
+      </div>
+
+      <div class="container">
+        <footer class="pt-4 my-md-5 pt-md-5 border-top">
+          <div class="row">
+            <div class="col-12 col-md">
+              <img class="mb-2" src="https://getbootstrap.com/assets/brand/bootstrap-solid.svg" alt="" width="24"
+                height="24">
+              <small class="d-block mb-3 text-muted">&copy; 2019-2020</small>
+              <div class="count"></div>
+            </div>
+            <div class="col-6 col-md">
+              <h5>Features</h5>
+              <ul class="list-unstyled text-small">
+                <li><a class="text-muted" href="#">Cool stuff</a></li>
+                <li><a class="text-muted" href="#">Random feature</a></li>
+                <li><a class="text-muted" href="#">Team feature</a></li>
+                <li><a class="text-muted" href="#">Stuff for developers</a></li>
+                <li><a class="text-muted" href="#">Another one</a></li>
+                <li><a class="text-muted" href="#">Last time</a></li>
+              </ul>
+            </div>
+            <div class="col-6 col-md">
+              <h5>Resources</h5>
+              <ul class="list-unstyled text-small">
+                <li><a class="text-muted" href="#">Resource</a></li>
+                <li><a class="text-muted" href="#">Resource name</a></li>
+                <li><a class="text-muted" href="#">Another resource</a></li>
+                <li><a class="text-muted" href="#">Final resource</a></li>
+              </ul>
+            </div>
+            <div class="col-6 col-md">
+              <h5>About</h5>
+              <ul class="list-unstyled text-small">
+                <li><a class="text-muted" href="#">Team</a></li>
+                <li><a class="text-muted" href="#">Locations</a></li>
+                <li><a class="text-muted" href="#">Privacy</a></li>
+                <li><a class="text-muted" href="#">Terms</a></li>
+              </ul>
+            </div>
+          </div>
+        </footer>
+      </div>
+
+    </div>
+  </div>
+  <div class="overlay"></div>    
+
+  <script src="./js/index.js"></script>
 </body>
-
 </html>
