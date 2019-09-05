@@ -1,33 +1,69 @@
-let display = document.getElementById('viewer');
+(function(){
+    const buttons = [
+        [7, 8, 9, '+'], 
+        [4, 5 ,6, '-'], 
+        [1, 2, 3, '*'], 
+        [0, '.', '=', '/']
+    ];
+    let calc = '<div class="viewer">0</div><button>&#8592;</button><button>C</button>';
+    let b = '';
 
-let leftOperand, 
-    operation,
-    rightOperand;
-    let sum = 0;
+    buttons.forEach(function callback(button) {
+        button.forEach(function callback(but) {
+            b += `<button>${but}</button>` 
+        });
+    });
 
-    let b2 = document.getElementById('b2');
-    let b1 = document.getElementById('b1');
-    let plus = document.getElementById('plus');
-    let equal = document.getElementById('equal');
+    calc += b; 
+    document.querySelector('.calculator').innerHTML = calc;
 
-    b2.onclick = function(){
-        leftOperand  = b2.textContent;
-        console.log(leftOperand);
-    }
-
-    b1.onclick = function(){
-        rightOperand  = b1.textContent;
-        console.log(rightOperand);
-    }
+    let display = document.querySelector('.viewer');
+    let allButtons = document.querySelectorAll('button');
+    // console.log(allButtons);
     
-    plus.onclick = function(){
-        operation = '+';
-    }
+    let leftOperand, currentOperation;
 
-    equal.onclick = function(){
-        if (operation == '+') {
-        sum = parseInt(leftOperand) + parseInt(rightOperand);
-        console.log(sum);
-        }
-        display.textContent  = sum;
-    }
+    for (let i=0; i<allButtons.length; i++){
+        let el = allButtons[i];
+        el.addEventListener('click', function() {
+            if (Number.isInteger(+this.innerText)||this.innerText === '.') {
+                if (+display.innerText === 0) {
+                    display.innerText = this.innerText;
+                } else {
+                    display.innerText = display.innerText + this.innerText;
+                }
+            }
+            if (this.innerText.toLowerCase() === 'c') {
+                display.innerText = 0;
+            }
+    
+            // Remove a char from right
+            if (this.innerText.charCodeAt(0) === 8592 ) {
+                if (+display.innerText.length > 1) {
+                    display.innerText = display.innerText.slice(0, display.innerText.length-1);
+                } else {
+                    display.innerText = 0;
+                }
+            }
+            if (this.innerText === '+' ||
+                this.innerText === '-' ||
+                this.innerText === '*' ||
+                this.innerText === '/') {
+                 leftOperand = display.innerText;
+                 currentOperation = this.innerText;
+                 display.innerText = 0;
+            }
+    
+            if (this.innerText === '=') {
+                if (leftOperand) {
+                    eval('var result = function(){return +leftOperand ' + currentOperation + ' +display.innerText }()');
+                    display.innerText = result;
+                    leftOperand = null;
+                    currentOperation = null;
+                }
+            }
+    
+        });
+    };
+
+})();

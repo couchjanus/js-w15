@@ -3,7 +3,8 @@ import 'bootstrap';
 import $ from "jquery";
 
 // import './app';
-import './test';
+// import './test';
 // import './jqtest';
-// import './jqapp';
+import './jqapp';
+// import './calc0';
 // import './calc1';

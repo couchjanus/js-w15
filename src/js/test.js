@@ -1,242 +1,278 @@
-// test.js
 'use strict';
 
-// document object
-// console.dir(document);
+// Синтаксис для создания нового массива:
+// var arr = new Array(); // Создали новый пустой массив []
+// var arrs = []; // Тоже создали новый пустой массив []
+// Создание элементов массива возможно несколькими способами:
 
-// Доступ к свойствам осуществляется по имени свойства (по ключу).
-// document object property
+// var earth = new Array(4); /* массив из 4-х элементов*/
 
-// console.log(document.domain); // localhost
-// console.log(document.URL); // http://localhost:1234/
-// console.log(document.title); // Shopping cart
-// console.log(document.body); // BODY
+// earth[0] = "Earth";
+// earth[1] = "24 h";
+// earth[2] = 6378;
+// earth[3] = 365.25;
 
-// console.log(document.doctype); // <!DOCTYPE html>
+// var earth = new Array("Earth", "24 h", 6378, 365.25);
 
-// ================nodeType==========================
-// console.log("тип узла: " + document.nodeType);
-// тип узла: 9
+// var earth = new Array(); // пустой массив
+// earth.xtype = "Solar";
+// earth.xday = "24 h";
+// earth.radius = 6378;
+// earth.period = 365.25;
 
-// ================nodeName==========================
-// console.log("Имя узла: " + document.nodeName);
-// Имя узла: #document
+// var country = ["UK", "USA", "GB"];
+// Если вы указываете числа или значения true или false при определении массива, то тип переменной будет числовой или булев тип, а не строковый.
 
-// ================nodeValue==========================
-// console.log("значение узла: " + document.nodeValue);
-// значение узла: null
+// var arr1 = ['первый элемент', 'второй элемент'];
+// console.log(arr1[0]);              // напечатает 'первый элемент'
+// console.log(arr1[1]);              // напечатает 'второй элемент'
 
-// Любой доступ и изменения DOM происходит через объект document.
-// ================Доступ к элементам==========================
-// console.log("Document Element: " + document.documentElement);
-// Document Element: [object HTMLHtmlElement]
+// Обращение или доступ к элементам массива в javaScript:
 
-// console.log(document.head); // head
+// var mas=new Array(1,25,'Hey');
+// mas[0]='Bye';
+// mas[1]=35;
 
-// В случае корректной HTML-страницы, это будет <html>.
-// console.log("Body Element: " + document.body);
-// Body Element: [object HTMLBodyElement], если есть в документе (обязан быть).
+// Свойство массивов length взаимосвязано с числом свойств.
+// var fruits = [];
+// fruits.push('банан', 'яблоко', 'персик');
+// console.log(fruits.length); // 3
 
-// Все дочерние элементы, включая текстовые находятся в массиве childNodes.
-// console.log('Все дочерние элементы ', document.body.childNodes);
+// Длина length – не количество элементов массива, а последний индекс + 1.
+// var arr2 = [];
+// arr2[1000] = true;
+// console.log(arr2.length); // 1001
 
-// Атрибут tagName есть у элементов и содержит имя тага в верхнем регистре, только для чтения.
-// имя тага
-// console.log(document.body.tagName); // BODY
+// При уменьшении length массив укорачивается.
+// var arr3 = [1, 2, 3, 4, 5];
+// arr3.length = 2; // укоротить до 2 элементов
+// console.log(arr3[3] );
+// arr3.length = 5; // вернуть length обратно, как было
+// console.log(arr3[3]); // undefined: значения не вернулись
 
-// Можно поменять цвет BODY: -->
-// document.body.style.backgroundColor = 'red';
+// ==============================================
+// let addToCart = document.querySelector('.add-to-cart');
 
-// Можно поменять цвет текста:
-// document.body.style.color = 'white';
+// console.dir(typeof(addToCart)); // object
 
-// Можно вернуть обратно:
-// document.body.style.backgroundColor = '';
-// document.body.style.color = '';
+// addToCart.addEventListener('click', function () {
+//     let y = 180;
+//     document.querySelector('.card-img-top').style.transform = 'rotateY(' + y + 'deg)';
+// }); 
+// ======================== NodeList ==========================
+// let addToCarts = document.querySelectorAll('.add-to-cart'); 
 
-// Пример задания элементу нескольких стилей:
+// console.dir(addToCarts); // NodeList(2)
+// console.log(addToCarts.length);
 
-var elem = document.getElementById('elem');
-// elem.style.cssText = 'color: red; font-size: 20px;';
+// перебор элементов массива addToCarts:
 
-// Чтобы предыдущие стили не перезаписывались, можно сделать так:
-elem.style.cssText += 'color: red; font-size: 24px;';
+// for (let i = 0; i < addToCarts.length; i++) {
+//     console.log(addToCarts.item(i));
+//     console.log(addToCarts[i]); // Вызов myNodeList.item(i) необязателен в JavaScript
+// }
 
-console.log(elem.style.cssText);
+// Обход DOM коллекций NodeList: 
 
-// document.body.style.cssText = "color: #072a38; font: 300 18px/1.6 'Source Sans Pro',sans-serif; margin: 0; padding: 5em 0 2em; text-align: center;";
+// Оператор for...of работает только на платформах, где
+// реализован NodeList.prototype[Symbol.iterator]
 
-let h1 = document.querySelector('h1');
-let style = window.getComputedStyle(h1);
+// let list = document.querySelectorAll('.add-to-cart');
+// for (let item of list) {
+//     console.log(item);
+// }
 
-// свойства paddingLeft/paddingTop
-console.log(style.paddingLeft); 
+// Метод NodeList.entries () возвращает итератор, позволяющий просмотреть все пары ключ / значение, содержащиеся в этом объекте. Значения являются объектами Node.
 
-// getComputedStyle(elem).padding = пустая строка, или сгенерированное значение из известных внутренних отступов Стандарта для этого нет.
-console.log(style.padding); 
+// Using for..of
+// for(var entry of addToCarts.entries()) { 
+//     console.log(entry);
+// }
 
-// Некоторые браузеры (Chrome) отображают margin = 10px, а некоторые (Firefox) – нет:
-let sty = getComputedStyle(document.body);
-console.log('margin= ', sty.margin); // пустая строка в Firefox
+// Метод NodeList.keys () возвращает итератор, позволяющий просмотреть все ключи, содержащиеся в этом объекте. Ключи имеют целое число без знака.
 
+// Using for..of 
+// for(var key of addToCarts.keys()) { 
+//     console.log(key); 
+// }
+// Метод NodeList.values () возвращает итератор, позволяющий просмотреть все значения, содержащиеся в этом объекте. Значения являются объектами Node.
 
-// CSSStyleDeclaration.cssText: string
-// property (ambient)
-// (property) CSSStyleDeclaration.cssText: string
+// Using for..of 
+// for(var value of addToCarts.values()) { 
+//     console.log(value); 
+// }
 
-console.log(style.cssText);
-console.log(style);
-
-// CSSStyleDeclaration.length: number
-// property (ambient)
-// (property) CSSStyleDeclaration.length: number
-console.log(style.length);
-
-console.log(style.item(100)); // item(index: number): string
-
-// CSSStyleDeclaration.getPropertyValue(propertyName: string): string
-// method (ambient)
-// (method) CSSStyleDeclaration.getPropertyValue(propertyName: string): string
-console.log(style.getPropertyValue('color'));
-
-// innerHTML
-// Свойство innerHTML – позволяет получать и изменять полностью всё содержимое, лежащее между открывающим и закрывающим тегами объекта.
-// Свойство innerHTML применяется, в основном, для динамического изменения содержания страницы, например:
-// document.body.innerHTML = '<h1 id="bye">Bye! See ya!</h1>';
-
-// getElementById
-// document.getElementById("bye").style.color ="yellow";
-
-
-// document.getElementById("main").innerHTML = '<h1 id="bye" class="see">Bye! See ya!</h1><div id="content-holder"><div id="content">Элемент</div></div>';
-// document.getElementById("bye").style.color ="red";
-
-// document.getElementById('content').innerHTML = 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Libero tempore necessitatibus obcaecati accusamus ullam autem ut iste, vel suscipit adipisci officiis doloribus dolores quasi minus pariatur ex omnis modi neque?';
-// document.getElementById('content-holder').style.color ="blue";
-
-// getElementsByTagName
-// document.body.getElementsByTagName('h1')[0].innerHTML="Hello world";
-
-// Свойство textContent используется для получения и установки текста узла.
-
-// document.getElementsByTagName('h1')[0].textContent = 'Hello Text Content!';
-
-// querySelectorAll
-// document.querySelectorAll('h1')[0].textContent = 'Hello querySelectorAll Text Content!';
-
-// querySelector
-// document.querySelector('h1').textContent = 'Hello JavaScript!';
-
-// Метод getElementsByClassName находит массив объектов определенного класса.
-// getElementsByClassName
-// document.getElementsByClassName('see')[0].innerHTML = 'Hello JavaScript ClassName!';
+// forEach
+// addToCarts.forEach( 
+//     function(value, index) { 
+//       console.log(value + ', ' + index); 
+//     }
+// );
 
 
+// let list = document.querySelectorAll('.add-to-cart'); // returns NodeList
 
-function messageShow() {
-    alert('Документ и все ресурсы загружены!');
-  }
+// let list_array = Array.prototype.slice.call(list); // преобразует NodeList в Array
 
-// window.onload = function() {
-//     messageShow();
-// };
+// let forEach = Array.prototype.forEach;
 
+// let list = document.querySelectorAll('.add-to-cart');
 
-// (function(){
-//     console.log('Документ и все ресурсы загружены!');
-// })();
+// forEach.call(list, function(iten){
+//     console.log(item); 
+// });
 
 
-// window.onbeforeunload = function() {
-//     return "Точно перейти? И куда же ты собрался?";
-// };
+// addToCarts.forEach( 
+//     function(value, index) { 
+//       console.log(value + ', ' + index); 
+//     }
+// );
 
-// Добавляет слушателя событий DOMContentLoaded
-// document.addEventListener("DOMContentLoaded", ready);
 
-function ready() {
- hello.innerHTML = "Я готова!";
-}
+// let addToCarts = document.getElementsByClassName('add-to-cart'); // Это HTMLCollection
 
-// var button = document.getElementById('button')
-// .addEventListener('click', buttonClick);
+// console.log(addToCarts.item(0));     // Вы можете использовать метод item( ) для доступа к элементу
+// console.log(addToCarts[1]);          // Однако, использование квадратных скобок намного проще и более распространено
 
-function buttonClick(e) {
-     console.log('Button clicked');
-}
+// перебор элементов массива addToCarts:
 
-function buttonClick1(e) {
-    document.getElementById('hell').textContent = 'Changed';
-    document.querySelector('#main').style.backgroundColor = '#f4f';
-    console.log(e);
-    console.log(e.target);
-    console.log(e.target.id);
-    console.log(e.target.className);
-    console.log(e.target.classList);
-}
+// console.log(addToCarts.length);
 
-function buttonClick2(e){
-    var output = document.getElementById('output');
-    output.innerHTML = '<h3>'+e.target.id+'</h3>';
-    console.log(e.type);
-    console.log(e.clientX);
-    console.log(e.clientY);
-    console.log(e.offsetX);
-    console.log(e.offsetY);
-}
-  
-// (function(){
-//     console.log('Документ и все ресурсы загружены!');
-//     document.getElementById("sidebarCollapse").addEventListener('click', function () {
-//             document.querySelector(".sidebar").classList.add('active');
-//         }
-//     );
-// })();
- 
+// for (let i = 0; i < addToCarts.length; i++) {
+//       console.log(addToCarts[i]);
+// }
 
-// (function () {
-//     document.getElementById("sidebarCollapse").addEventListener('click', function () {
-//         if (document.querySelector(".sidebar").classList.contains("active")) {
-//             document.querySelector(".sidebar").classList.remove('active');
-//         } else {
-//             document.querySelector(".sidebar").classList.add('active');
-//         }
+// for (let i=0; i<addToCarts.length; i++ ){
+//    addToCarts[i].addEventListener('click', function (e) {
+//        console.log(e);
+//    });
+// }
+
+// for (let i=0; i<addToCarts.length; i++ ){
+//     addToCarts[i].addEventListener('click', function (e) {
+//         console.log(e.target);
+//         // e.target.style.display = 'none';
 //     });
-// })();
- 
+// }
 
+// for (let i=0; i<addToCarts.length; i++ ){
+//     addToCarts[i].addEventListener('click', function (e) {
+//         // ==========parentNode==============
+//         // console.log(e.target.parentNode);
+//         // console.log(e.target.parentNode.parentNode.parentNode.parentNode);
+        
+//         // =========childNodes==============
+//         // console.log(e.target.parentNode.parentNode.parentNode.parentNode.childNodes);
+        
+//         // ===========childElementCount==========
+//         // console.log(e.target.parentNode.parentNode.parentNode.parentNode.childElementCount);
+        
+//         // ===========children childElementCount=========
+//         console.log(e.target.parentNode.parentNode.parentNode.parentNode.children);
+//         console.log(e.target.parentNode.parentNode.parentNode.parentNode.childElementCount);
+        
+        // let y = 180;
+        // e.target.parentNode.parentNode.parentNode.parentNode.children[0].style.transform = 'rotateY(' + y + 'deg)';
 
-// function el(selector) {
-//     return document.querySelector(selector);
+//         // =========firstChild lastChild==============
+//         console.log(e.target.parentNode.parentNode.parentNode.parentNode.firstChild);
+//         console.log(e.target.parentNode.parentNode.parentNode.parentNode.lastChild);
+        
+//         // =========nextSibling previousSibling=============
+//         console.log(e.target.parentNode.parentNode.parentNode.parentNode.firstChild.nextSibling);
+//         console.log(e.target.parentNode.parentNode.parentNode.parentNode.lastChild.previousSibling);
+        
+//         // ========firstElementChild lastElementChild==========
+//         console.log(e.target.parentNode.parentNode.parentNode.parentNode.firstElementChild);
+
+//         e.target.parentNode.parentNode.parentNode.parentNode.firstElementChild.style.transform = 'rotateY(' + y + 'deg)';
+
+//         console.log(e.target.parentNode.parentNode.parentNode.parentNode.lastElementChild);
+        
+//     });
 // }
 
 
+
+
+// ================ this =====================
+// console.log(this.document === document); // true
+
+// // В браузерах, объект window также является глобальным:
+// console.log(this === window); // true
+
+// this.a = 37;
+// console.log(window.a); // 37
+
+// function f() {
+//     console.log(this === window); // true
+// }
+// f();
+
 // (function () {
-//     el("#sidebarCollapse").addEventListener('click', function () {
-//         el(".sidebar").classList.add("active");
-//         el(".overlay").classList.add("active")
-//     });
+//     console.log(this === window); // true
 // })();
 
+// var globalObject = this;
+// var foo = (() => this);
+// console.log(foo() === globalObject); // true
 
-// добавление элементу класса "pink"
-// elem.classList.add("pink");
+// var o = {
+//     prop: 37,
+//     f: function() {
+//       return this.prop;
+//     }
+//   };
+// console.log(o.f()); // logs 37
 
-// можно добавить нескольких классов через запятую
-// elem.classList.add( "pink, container", "bg-big" );
+// ============================================
+// for (let i=0; i<addToCarts.length; i++ ){
+//   addToCarts[i].addEventListener('click', function () {
+//       console.log(this);
+//       let y = 180;
+//       console.log(this.parentNode.parentNode.parentNode.parentNode.firstElementChild);
+//       this.parentNode.parentNode.parentNode.parentNode.firstElementChild.style.transform = 'rotateY(' + y + 'deg)';
+//   });
+// }
 
-// удаление класса "pink"
-// elem.classList.remove("pink");
 
-//можно удалить несколько классов
-// elem.classList.remove("pink", "bordered", "clearfix");
+// for (let i=0; i<addToCarts.length; i++ ){
+//   addToCarts[i].addEventListener('click', function () {
+//       let y = 180;
+//       // this.parentNode.parentNode.parentNode.parentNode.firstElementChild.style.transform = 'rotateY(' + y + 'deg)';
+//       this.closest(".card").firstElementChild.style.transform = 'rotateY(' + y + 'deg)';
+//   });
+// }
 
-// переключение класса "pink"
-// elem.classList.toggle("pink");
 
-//свойство,которое возвращает количество классов, назначенных элементу
-// elem.classList.length
+// let addToCarts = document.querySelectorAll('.add-to-cart');
 
-// проверка, есть ли у элемента класс "pink".
-// Если есть - метод возвращает true, если класса нет, то false
-// console.log( elem.classList.contains("pink") );
+// addToCarts.forEach(function(addToCart){
+//     addToCart.addEventListener('click', function() {
+//         let y = 180;
+//         this.closest(".card").firstElementChild.style.transform = 'rotateY(' + y + 'deg)';
+//     });
+// });
+
+
+// let plus = document.querySelectorAll('.plus');
+// plus.forEach(function(el){
+//   el.addEventListener('click', function() {
+//     let val = this.previousElementSibling.innerText;
+//     // val = this.previousElementSibling.innerText = val+1;
+//     val = this.previousElementSibling.innerText = +(val)+1;
+//   });
+// });
+
+// let minus = document.querySelectorAll('.minus');
+
+// minus.forEach(function(el){
+//   el.addEventListener('click', function() {
+//     let val = this.nextElementSibling.innerText;
+//     if (val > 1) {
+//     //   val = this.nextElementSibling.innerText = val-1;
+//       val = this.nextElementSibling.innerText = +(val)-1;
+//     }
+//   });
+// });
