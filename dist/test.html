@@ -112,6 +112,7 @@
           <div class="row showcase">
             <div class="col-md-4">
               <div class="card mb-4 box-shadow">
+                <div class="win"><h2>You are win!</h2></div>
                 <img class="card-img-top" src="/03.fd463baf.jpg" alt="Card image cap">
                 <div class="card-body">
                   <h4 class="float-right">$<span class="product-price">55.00</span></h4>
@@ -132,6 +133,7 @@
             </div>
             <div class="col-md-4">
               <div class="card mb-4 box-shadow">
+                <div class="win"><h2>You are win!</h2></div>
                 <img class="card-img-top" src="/02.cafa12f0.jpg" alt="Card image cap">
                 <div class="card-body">
                   <h4 class="float-right">$<span class="product-price">44.00</span></h4>
@@ -150,6 +152,7 @@
             </div>
             <div class="col-md-4">
               <div class="card mb-4 box-shadow">
+                <div class="win"><h2>You are win!</h2></div>
                 <img class="card-img-top" src="/01.5d097efa.jpg" alt="Card image cap">
                 <div class="card-body">
                   <h4 class="float-right">$<span class="product-price">33.00</span></h4>
@@ -241,20 +244,30 @@
   </script>
  
  
-  <template id="cartItem">
-    <div class="cart-item">
-      <div class="item item-name">Product name <span class="float-right"><i class="far fa-times-circle"></i></span>
-      </div>
-      <div class="item item-img"> </div>
+  <template id="productItem">
+    <div class="col-md-4">
+      <div class="card mb-4 box-shadow">
+        <div class="win"><h2>You are win!</h2></div>
+        <img class="card-img-top" src="/03.fd463baf.jpg" alt="Card image cap">
+        <div class="card-body">
+          <h4 class="float-right">$<span class="product-price">55.00</span></h4>
+          <h4 class="product-name">Fierst product</h4>
+          <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
+            additional content. This content is a little bit longer.</p>
 
-      <div class="item item-quontity">
-        <button class="adding minus" title="Open"><i class="fas fa-minus-circle"></i></button>
-        <span class="adding quontity">1</span>
-        <button class="adding plus" title="Add"><i class="fas fa-plus-circle"></i></button>
+          <div class="d-flex justify-content-between align-items-center">
+            <div class="btn-group">
+              <button type="button" class="btn btn-sm btn-outline-secondary view-detail">View Detail</button>
+              <button type="button" class="btn btn-sm btn-outline-secondary add-to-cart">Add To Cart</button>
+            </div>
+            <small class="text-muted">31 reviews</small>
+          </div>
+
+        </div>
       </div>
-      <div class="item">$<span class="item-price">55.00</span></div>
     </div>
   </template>
+
 
   <script src="/js.00a46daa.js"></script>
 </body>

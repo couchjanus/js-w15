@@ -2,8 +2,8 @@
 import 'bootstrap';
 // import $ from "jquery";
 
-import './app';
+// import './app';
 // import './test';
-// import './jqtest';
+import './jqtest';
 // import './jqapp';
 // import './calc';
