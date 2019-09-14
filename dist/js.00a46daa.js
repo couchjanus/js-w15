@@ -17967,13 +17967,19 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
     value: true
   });
 });
-},{"jquery":"../node_modules/jquery/dist/jquery.js","popper.js":"../node_modules/popper.js/dist/esm/popper.js"}],"js/data.js":[function(require,module,exports) {
-"use strict";
+},{"jquery":"../node_modules/jquery/dist/jquery.js","popper.js":"../node_modules/popper.js/dist/esm/popper.js"}],"js/test.js":[function(require,module,exports) {
+'use strict'; // function initStorage() {
+//   window.localStorage.getItem("basket") ?
+//     window.localStorage.getItem("basket") :
+//     window.localStorage.setItem("basket", '');
+// }
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.data = void 0;
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function initStorage() {
+  window.localStorage.getItem("basket") ? window.localStorage.getItem("basket") : window.localStorage.setItem("basket", JSON.stringify([]));
+}
+
 var data = [{
   id: 0,
   name: "Cool Cat",
@@ -17988,138 +17994,7 @@ var data = [{
   picture: ["cat2.jpg", "cat4.jpg", "cat5.jpg", "cat6.jpg", "cat7.jpg"],
   subtitle: ["Tropical cat", "Mama mia!", "Je t'adore", "Beach cat", "White building cat"],
   description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus dignissimos, maxime ea excepturi veritatis itaque."
-}, {
-  id: 2,
-  name: "Red Cat",
-  price: 55,
-  picture: ["cat3.jpg", "cat4.jpg", "cat5.jpg", "cat6.jpg", "cat7.jpg"],
-  subtitle: ["Tropical cat", "Mama mia!", "Je t'adore", "Beach cat", "White building cat"],
-  description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus dignissimos, maxime ea excepturi veritatis itaque."
-}, {
-  id: 3,
-  name: "Blue Cat",
-  price: 44,
-  picture: ["cat4.jpg", "cat8.jpg", "cat5.jpg", "cat6.jpg", "cat7.jpg"],
-  subtitle: ["Je t'adore", "Beach cat", "Tropical cat", "Mama mia!", "White building cat"],
-  description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus dignissimos, maxime ea excepturi veritatis itaque."
-}, {
-  id: 4,
-  name: "Green Cat",
-  price: 33,
-  picture: ["cat5.jpg", "cat9.jpg", "cat5.jpg", "cat6.jpg", "cat7.jpg"],
-  subtitle: ["White building cat", "Je t'adore", "Beach cat", "Tropical cat", "Mama mia!"],
-  description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus dignissimos, maxime ea excepturi veritatis itaque."
-}, {
-  id: 5,
-  name: "Grey Cat",
-  price: 22,
-  picture: ["cat6.jpg", "cat7.jpg", "cat5.jpg", "cat8.jpg", "cat7.jpg"],
-  subtitle: ["Mama mia!", "Je t'adore", "Beach cat", "Tropical cat", "White building cat"],
-  description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus dignissimos, maxime ea excepturi veritatis itaque."
-}, {
-  id: 6,
-  name: "Orange Cat",
-  price: 77,
-  picture: ["cat7.jpg", "cat8.jpg", "cat5.jpg", "cat9.jpg", "cat6.jpg"],
-  subtitle: ["Tropical cat", "Je t'adore", "Beach cat", "Mama mia!", "White building cat"],
-  description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus dignissimos, maxime ea excepturi veritatis itaque."
-}, {
-  id: 7,
-  name: "Pretty Cat",
-  price: 88,
-  picture: ["cat8.jpg", "cat7.jpg", "cat5.jpg", "cat9.jpg", "cat6.jpg"],
-  subtitle: ["Beach cat", "Je t'adore", "Tropical cat", "Mama mia!", "White building cat"],
-  description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus dignissimos, maxime ea excepturi veritatis itaque."
 }];
-exports.data = data;
-},{}],"js/app.js":[function(require,module,exports) {
-'use strict';
-
-var _data = require("./data.js");
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function el(selector) {
-  return document.querySelector(selector);
-}
-
-function makeProductItem($template, product) {
-  $template.querySelector('.win').setAttribute('productId', product.id);
-  $template.querySelector('.product-name').textContent = product.name;
-  $template.querySelector('.card-img-top').setAttribute('src', 'images/' + product.picture[0]);
-  $template.querySelector('img').setAttribute('alt', product.name);
-  $template.querySelector('.product-price').textContent = product.price;
-  return $template;
-}
-
-function addProductToCart(content, item) {
-  content.querySelector('.item-title').textContent = item.querySelector('.product-name').textContent;
-  content.querySelector('.item-price').textContent = item.querySelector('.product-price').textContent;
-  content.querySelector('.item-price').setAttribute('price', item.querySelector('.product-price').textContent);
-  content.querySelector('.item-img').style.backgroundImage = 'url(' + item.querySelector('img').getAttribute('src') + ')';
-  return content;
-}
-
-function slideItem(content, item, i) {
-  content.querySelector('.carousel-item__title').textContent = item.name;
-  content.querySelector('.carousel-item__subtitle').textContent = item.subtitle[i];
-  content.querySelector('.carousel-item__description').textContent = item.description;
-  content.querySelector('.carousel-item__image').style.backgroundImage = 'url(images/' + item.picture[i] + ')';
-  return content;
-}
-
-function carousel(dataItem) {
-  var carouselItem = el('#carouselItem').content;
-  var detailTemplate = el('#productDetail').content;
-
-  for (var i = 0; i < dataItem.picture.length; i++) {
-    detailTemplate.querySelector('.carousel-detail').append(document.importNode(slideItem(carouselItem, dataItem, i), true));
-  }
-
-  el('.showcase').replaceWith(document.importNode(detailTemplate, true));
-  document.querySelectorAll('.carousel-detail-item')[0].classList.add('active-slide');
-  var total = document.querySelectorAll('.carousel-detail-item').length;
-  var current = 0;
-  moveLR('#moveRight', 1);
-  moveLR('#moveLeft', -1);
-
-  function moveLR(eId, step) {
-    el(eId).addEventListener('click', function () {
-      var prev_next = current;
-      current = current + step;
-      setSlide(prev_next, current);
-    });
-  }
-
-  function setSlide(prev, next) {
-    var slide = current;
-
-    if (next > total - 1) {
-      slide = 0;
-      current = 0;
-    }
-
-    if (next < 0) {
-      slide = total - 1;
-      current = total - 1;
-    }
-
-    document.querySelectorAll('.carousel-detail-item')[prev].classList.remove('active-slide');
-    document.querySelectorAll('.carousel-detail-item')[slide].classList.add('active-slide');
-  }
-}
-
-function _translate(img) {
-  var offset = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : -150;
-  var rect = img.getBoundingClientRect();
-  var elements = ['translate3D('];
-  return [].concat(elements, [rect.left - offset + 'px,', rect.top - offset + 'px,0)']).join('');
-} // ====================================================
-
-
-function initStorage() {
-  window.localStorage.getItem("basket") ? window.localStorage.getItem("basket") : window.localStorage.setItem("basket", JSON.stringify([]));
-}
 
 var Product = function Product(id, name, price, picture, amount) {
   _classCallCheck(this, Product);
@@ -18131,455 +18006,276 @@ var Product = function Product(id, name, price, picture, amount) {
   this.amount = amount;
 };
 
-function openCart(shoppingCart) {
-  showCart(shoppingCart);
-  el('.sidebar').classList.add('active');
-  el('.overlay').classList.add('active');
-}
-
-function closeCart() {
-  el('.sidebar').classList.remove('active');
-  el('.overlay').classList.remove('active');
-}
-
-function getProducts() {
-  return JSON.parse(window.localStorage.getItem("basket"));
-}
-
-function addProductToCart(content, item) {
-  content.querySelector('.item-title').textContent = item.querySelector('.product-name').textContent;
-  content.querySelector('.item-price').textContent = item.querySelector('.product-price').textContent;
-  content.querySelector('.item-price').setAttribute('price', item.querySelector('.product-price').textContent);
-  content.querySelector('.item-img').style.backgroundImage = 'url(' + item.querySelector('img').getAttribute('src') + ')';
-  return content;
-}
-
-function dataItem(id) {
-  return _data.data[id];
-}
-
-function getProductItem(item) {
-  return {
-    id: item.id,
-    price: item.price,
-    name: item.name,
-    picture: "images/" + item.picture[0]
-  };
-} // function saveCart(product) {
-//     let tmpProducts = getProducts();
-//     console.log(tmpProducts);
-//     tmpProducts.push(product);
-//     window.localStorage.setItem("basket",JSON.stringify(tmpProducts));
-//     console.log(localStorage);
-// }
-
-
-function saveCart(product) {
-  var tmpProducts = getProducts();
-  console.log(tmpProducts);
-  tmpProducts.push(new Product(product.id, product.name, product.price, product.picture, 1));
-  console.log(tmpProducts);
-  window.localStorage.setItem("basket", JSON.stringify(tmpProducts));
-  console.log(localStorage);
-}
-
-function addProduct(prod) {
-  var tmpProducts = getProducts();
-
-  if (tmpProducts.length > 0) {
-    var exist = tmpProducts.some(function (elem) {
-      return elem.id === prod.id;
-    });
-
-    if (exist) {
-      tmpProducts.forEach(function (elem) {
-        if (elem.id === prod.id) {
-          elem.amount += 1;
-        }
-      });
-    } else {
-      tmpProducts.push(new Product(prod.id, prod.name, prod.price, prod.picture, 1));
-    }
-  } else {
-    tmpProducts.push(new Product(prod.id, prod.name, prod.price, prod.picture, 1));
-  }
-
-  window.localStorage.setItem("basket", JSON.stringify(tmpProducts));
-}
-
-function plusProduct(id) {
-  var tmpProducts = getProducts();
-  tmpProducts.forEach(function (elem) {
-    if (elem.id === +id) {
-      elem.amount += 1;
-    }
-  });
-  window.localStorage.setItem("basket", JSON.stringify(tmpProducts));
-}
-
-function minusProduct(id) {
-  var tmpProducts = getProducts();
-  tmpProducts.forEach(function (elem) {
-    if (elem.id === +id) {
-      elem.amount -= 1;
-    }
-  });
-  window.localStorage.setItem("basket", JSON.stringify(tmpProducts));
-}
-
-function removeProduct(index) {
-  var tmpProducts = getProducts();
-  tmpProducts.splice(tmpProducts.indexOf(tmpProducts.find(function (x) {
-    return x.id === +index;
-  })), 1);
-  window.localStorage.setItem("basket", JSON.stringify(tmpProducts));
-}
-
-function productInCart(content, item) {
-  content.querySelector('.cart-item').setAttribute('id', item.id);
-  content.querySelector('.item-title').textContent = item.name;
-  content.querySelector('.item-price').textContent = item.price;
-  content.querySelector('.quontity').textContent = item.amount;
-  content.querySelector('.item-price').setAttribute('price', item.price);
-  content.querySelector('.item-img').style.backgroundImage = 'url(' + item.picture + ")";
-  content.querySelector('.item-price').innerText = parseFloat(item.price * item.amount).toFixed(2);
-  return content;
-}
-
-function updateTotal() {
-  var quantities = 0,
-      total = 0,
-      $cartTotal = document.querySelector('.cart-total span'),
-      items = document.querySelector('.cart-items').children;
-  Array.from(items).forEach(function (item) {
-    total += parseFloat(item.querySelector('.item-price').textContent);
-  });
-  $cartTotal.textContent = parseFloat(Math.round(total * 100) / 100).toFixed(2);
-} // function showCart() {
-//     let shoppingCart = getProducts();
-//     if (shoppingCart.length == 0) {
-//         console.log("Your Shopping Cart is Empty!");
-//         return;
-//     }
-//     document.querySelector(".cart-items").innerHTML = '';
-//     shoppingCart.forEach(function (item) {
-//         let template = document.getElementById("cartItem").content;
-//         productInCart(template, item);
-//         document.querySelector(".cart-items").append(document.importNode(productInCart(template, item), true));
-//     });
-// }
-
-
-function showCart() {
-  var shoppingCart = getProducts();
-
-  if (shoppingCart.length == 0) {
-    console.log("Your Shopping Cart is Empty!");
-    return;
-  }
-
-  document.querySelector(".cart-items").innerHTML = '';
-  shoppingCart.forEach(function (item) {
-    var template = document.getElementById("cartItem").content;
-    productInCart(template, item);
-    document.querySelector(".cart-items").append(document.importNode(productInCart(template, item), true));
-  });
-  updateTotal();
-} //=====================================================
-
-
 (function () {
-  initStorage();
+  // Проверить, поддерживает ли браузер API sessionStorage и localStorage можно с помощью следующей строки:
+  // if (window.sessionStorage && window.localStorage) {
+  //   // объекты sessionStorage и localstorage поддерживаются
+  //   console.log('объекты sessionStorage и localstorage поддерживаются');
+  // } else {
+  //   // объекты sessionStorage и localstorage не поддерживаются
+  //   console.log('объекты sessionStorage и localstorage не поддерживаются');
+  // }
+  initStorage(); // if (localStorage) {
+  //     console.log("It's basket storage");
+  //     console.log('localStorage.length = ', localStorage.length);
+  //     console.log('localStorage.basket.length = ', localStorage.basket.length);
+  //     // LocalStorage имеет простой API - всего 5 метода.
+  //     // Storage.key(Ключ)  // Получить имя n-ного ключа в Storage
+  //     console.log('Получить имя n-ного ключа в Storage: ', localStorage.key(0));
+  //     // Storage.getItem(Ключ)  // Получить значение ключа.
+  //     console.log('Получить имя n-ного ключа в Storage: ', localStorage.getItem('basket'));
+  //     // Storage.setItem(Ключ, Значение)  // Добавление  ключа в Storage или обновление его значение, если ключ уже существовал.
+  //     localStorage.setItem('basket', 'true');
+  //     console.log('Добавление  ключа в Storage или обновление его значение, если ключ уже существовал: ', localStorage.getItem('basket'));
+  //     // Storage.removeItem(Ключ)   // Удалит этот ключ из Storage.
+  //     localStorage.removeItem('basket');
+  //     console.log('Удалит этот ключ из Storage: ', localStorage.getItem('basket'));
+  //     // Storage.clear()   // При вызове, метод удалит все ключи из Storage.
+  //     localStorage.clear();
+  //     console.log('localStorage.length = ', localStorage.length);
+  // }
+  // let stringifyData = JSON.stringify(data);
+  // console.log(stringifyData);
+  // let parseData = JSON.parse(stringifyData);
+  // console.log(parseData[1] );
+  // console.log(parseData[1]['picture'] );
+  // console.log(parseData[1]['picture'][1] );
+  // ---------------------------------
+  // создадим объект
+  // let product = {
+  //   id: 1, 
+  //   name: 'Cat', 
+  //   price: 555, 
+  //   picture:['cat1.jpg', 'cat2.jpg', 'cat3.jpg'],
+  //   amount: 1
+  // };
+  // let serialProduct = JSON.stringify(product); // сериализуем product
+  // console.log('serialProduct: ', serialProduct);
+  // localStorage.setItem("basket", serialProduct); // запишем serialProduct в хранилище по ключу "basket"
+  // console.log('localStorage.basket: ', localStorage.basket);
+  // let returnProduct = JSON.parse(localStorage.getItem("basket")) // парсим basket обратно в объект
+  // console.log('returnProduct: ', returnProduct);
+  // let tmpProducts = new Product(id, name, price, picture, 1);
+  // window.localStorage.setItem("basket",JSON.stringify(tmpProducts));
+  // console.log('localStorage.basket: ', localStorage.basket);
+  // =============== Стрелочные функции =========================
+  // Базовый синтаксис
+  // (param1, param2, …, paramN) => { statements }
+  // (param1, param2, …, paramN) => expression
+  // эквивалентно: (param1, param2, …, paramN) => { return expression; }
+  // Круглые скобки не обязательны для единственного параметра:
+  // (singleParam) => { statements }
+  // singleParam => { statements }
+  // Функция без параметров нуждается в круглых скобках:
+  // () => { statements }
+  // () => expression 
+  // Эквивалентно: () => { return expression; }
+  // Расширенный синтаксис
+  // Когда возвращаете литеральное выражение объекта, заключите тело в скобки
+  // params => ({foo: bar})
+  // Rest параметры и параметры по умолчанию поддерживаются
+  // (param1, param2, ...rest) => { statements }
+  // (param1 = defaultValue1, param2, …, paramN = defaultValueN) => { statements }
+  // Деструктуризация тоже поддерживается
+  // var f = ([a, b] = [1, 2], {x: c} = {x: a + b}) => a + b + c;
+  // f();  // 6
+  // В некоторых функциональных шаблонах приветствуются более короткие функции. Сравните:
+  // var elements = [
+  //   'Hydrogen',
+  //   'Helium',
+  //   'Lithium',
+  //   'Beryllium'
+  // ];
+  // elements.map(function(element) {
+  //   return element.length;
+  // }); // Это выражение вернет массив [8, 6, 7, 9]
+  // Функцию выше можно записать как стрелочную функцию:
+  // elements.map((element) => {
+  //   return element.length;
+  // }); // [8, 6, 7, 9]
+  // Если единственным оператором в выражении стрелочной функции является return,
+  // можно удалить return и окружающие фигурные скобки
+  // elements.map(element => element.length); // [8, 6, 7, 9]
+  // В данном случае, поскольку нам нужно только свойство length, мы можем использовать деструктуризированный параметр:
+  // Обратите внимание, что строка `"length"` соответствует свойству, которое мы хотим получить,
+  // в то время как `lengthFooBArX` это просто имя переменной, которую можно назвать как вы хотите
+  // elements.map(({ "length": lengthFooBArX }) => lengthFooBArX); // [8, 6, 7, 9]
+  // Это задание деструктуризированного параметра может быть записано, как показано ниже. Тем не менее, обратите внимание,
+  // что нет строки `"length"`, чтобы выбрать, какое свойство мы хотим получить. Вместо этого в качестве свойства,
+  // которое мы хотим извлечь из объекта, используется само литеральное имя переменной `length`
+  // elements.map(({ length }) => length); // [8, 6, 7, 9]
+  // Лямбда-выражения присутствуют в большинстве современных языков программирования (Python, Ruby, Java ...). Это просто выражения, которые создают функции. Это действительно важно для языка программирования для поддержки функций первого класса, что в основном означает передачу функций в качестве аргументов другим функциям или присвоение их переменным.
+  // В пре-ES6 JavaScript у нас есть функциональные выражения, которые дают нам анонимную функцию (функцию без имени).
+  // var anon = function (a, b) {return a + b};
+  // В ES6 у нас есть функции стрелок с более гибким синтаксисом, которые имеют некоторые бонусные функции и ошибки.
+  // мы могли бы написать приведенный выше пример как:
+  // var anon = (a, b) => a + b;
+  // или же
+  // var anon = (a, b) => {return a + b};
+  // если у нас есть только один параметр, мы можем потерять скобки
+  // var anon = a => a;
+  // и без параметров
+  // var () => {} // noop
+  // это выглядит довольно хорошо, когда вы меняете что-то вроде:
+  // [1,2,3,4] .filter (функция (значение) {возвращаемое значение% 2 === 0});
+  // к:
+  // [1,2,3,4] .filter (значение => значение% 2 === 0);
+  // Одним из основных преимуществ функций стрелок является то, что они не имеют своих собственных значений. Именно это лексически связано с огибающей. Это значит, что мы можем попрощаться с этим ужасным рисунком:
+  // class Logger {
+  //   dumpData(data) {
+  //     var _this = this;
+  //     // this dumps data to a file and get the name of the file via a callback
+  //     dump(data, function (outputFile) {
+  //       _this.latestLog = outputFile;
+  //     });
+  //   }
+  // }
+  // using arrow functions
+  // class Logger {
+  //   dumpData(data) {
+  //     dump(data, outputFile => this.latestLog = outputFile);
+  //   }
+  // }
+  // However there are some gotchas you should be aware of:
+  // This should be pretty obvious, but because this is lexically bound you can't change it; call() and apply() will not be able to provide another value for this.
+  // There is no arguments variable:
+  // (function () {console.log(arguments)})(1, 2); // will output [1, 2]
+  // (() => console.log(arguments))(1, 2); // will raise ReferenceError: arguments is not defined
+  // Be careful when returning object literals
+  // (() => {foo: 1})() // this will return undefined. 'foo: 1' is interpreted as a statement composed of a label and the literal 1
+  // the correct way should be wrapping it with parenthesis
+  // (() => ({foo: 1}))() // returns Object {foo: 1}
+  // Remember this is all ES6 and not supported by all browsers but you can always use Babel.
+  // Однако есть некоторые ошибки, о которых вы должны знать:
+  // Это должно быть довольно очевидно, но поскольку это лексически связано, вы не можете его изменить; call () и apply () не смогут предоставить другое значение для этого.
+  // Переменная аргументов отсутствует:
+  // (function () {console.log (arguments)}) (1, 2); // выведем [1, 2]
+  // (() => console.log (arguments)) (1, 2); // вызовет ReferenceError: аргументы не определены
+  // Будьте осторожны при возврате литералов объекта
+  // (() => {foo: 1}) () // это вернет undefined. 'foo: 1' интерпретируется как утверждение, состоящее из метки и литерала 1
+  // правильный путь должен заключаться в скобки
+  // (() => ({foo: 1})) () // возвращает объект {foo: 1}
+  // Помните, что это все ES6 и поддерживается не всеми браузерами, но вы всегда можете использовать Babel.
+  // let index = e.target.closest('.cart-item').getAttribute('id');
+  // console.log('index= ', index);
+  // x => x.id === +(index))
+  // ================== Метод some ===========================
 
-  if (localStorage) {
-    console.log("It's basket storage");
+  localStorage.clear();
+  initStorage();
+  var products = []; // создадим объект
+
+  var prod = {
+    id: 1,
+    name: 'Nice Cat',
+    price: 555,
+    picture: ['cat1.jpg', 'cat2.jpg', 'cat3.jpg'],
+    amount: 1
+  };
+  products.push(new Product(prod.id, prod.name, prod.price, prod.picture, prod.amount)); // tmpProducts.push(new Product(prod.id,prod.name,prod.price,prod.picture,1));
+
+  window.localStorage.setItem("basket", JSON.stringify(products));
+
+  function getProducts() {
+    return JSON.parse(window.localStorage.getItem("basket"));
   }
 
-  el('#sidebarCollapse').addEventListener('click', function () {
-    return openCart();
-  });
-  el('.dismiss').addEventListener('click', function () {
-    return closeCart();
-  });
-  el('.overlay').addEventListener('click', function () {
-    return closeCart();
-  });
-  var template = el('#productItem').content;
+  var tmpProducts = getProducts();
+  console.log('tmpProducts: ', tmpProducts); // Метод some() вызывает переданную функцию callback один раз для каждого элемента, присутствующего в массиве до тех пор, пока не найдет такой, для которого callback вернет истинное значение (значение, становящееся равным true при приведении его к типу Boolean). 
+  // Проверка значений элементов массива - существует ли в массиве какой-нибудь элемент с elem.id = id.
 
-  _data.data.forEach(function (item) {
-    el('.showcase').append(makeProductItem(template, item).cloneNode(true));
-  });
+  var id = 1;
+  var exist = tmpProducts.some(function (elem) {
+    return elem.id === id;
+  }); // Если такой элемент найден, метод some() немедленно вернёт true. В противном случае, если callback вернёт false для всех элементов массива, метод some() вернёт false. 
 
-  var content = el('#cartItem').content; // el('.cart-items').addEventListener(
-  //     'click',
-  //     function(e) {
-  //         if (e.target && e.target.matches('.remove-item')) {
-  //             e.target.parentNode.parentNode.remove();
-  //         }
-  //         if (e.target && e.target.matches('.plus')) {
-  //             let el = e.target;
-  //             let price = parseFloat(
-  //                 el.parentNode.nextElementSibling
-  //                     .querySelector('.item-price')
-  //                     .getAttribute('price')
-  //             );
-  //             let val = parseInt(el.previousElementSibling.innerText);
-  //             val = el.previousElementSibling.innerText = val + 1;
-  //             el.parentNode.nextElementSibling.querySelector(
-  //                 '.item-price'
-  //             ).innerText = parseFloat(price * val).toFixed(2);
-  //         }
-  //         if (e.target && e.target.matches('.minus')) {
-  //             let el = e.target;
-  //             let price = parseFloat(
-  //                 el.parentNode.nextElementSibling
-  //                     .querySelector('.item-price')
-  //                     .getAttribute('price')
-  //             );
-  //             let val = parseInt(el.nextElementSibling.innerText);
-  //             if (val > 1) {
-  //                 val = el.nextElementSibling.innerText = val - 1;
-  //             }
-  //             el.parentNode.nextElementSibling.querySelector(
-  //                 '.item-price'
-  //             ).innerText = parseFloat(price * val).toFixed(2);
-  //         }
-  //     },
-  //     false
-  // );
+  console.log(exist); // Функция callback вызывается только для индексов массива, имеющих присвоенные значения; она не вызывается для индексов, которые были удалены или которым значения никогда не присваивались.
+  // if(tmpProducts.length > 0){
+  //   let exist = tmpProducts.some(elem => {
+  //     return elem.id === prod.id;
+  //   });
+  // }
+  // Функция callback вызывается с тремя аргументами: значением элемента, индексом элемента и массивом, по которому осуществляется проход.
+  // Метод some() не изменяет массив, для которого он был вызван.
 
-  var addToCarts = document.querySelectorAll('.add-to-cart'); // ---------------------Step 1-----------------------------------
-  //     addToCarts.forEach(function(addToCart) {
-  //         addToCart.addEventListener('click', function() {
-  //             // создадим объект
-  //             let product = {
-  //                 id: 2, 
-  //                 name: 'Black Cat', 
-  //                 price: 555, 
-  //                 picture:['cat1.jpg', 'cat2.jpg', 'cat3.jpg']
-  //             };
-  //             saveCart(product);
-  //         let imgItem = this.closest('.card').querySelector('img');
-  //         let win = this.closest('.card').querySelector('.win');
-  //         if (imgItem) {
-  //             let imgClone = imgItem.cloneNode(true);
-  //             imgClone.classList.add('offset-img');
-  //             document.body.appendChild(imgClone);
-  //             imgItem.style.transform = 'rotateY(180deg)';
-  //             win.style.display = 'block';
-  //             imgClone.animate([{
-  //                 transform: _translate(imgItem)
-  //                 },
-  //                 {
-  //                     transform: _translate(document.querySelector('#sidebarCollapse'), 50) + 'perspective(500px) scale3d(0.1, 0.1, 0.2)'
-  //                 },
-  //             ], {
-  //                 duration: 2000,
-  //             })
-  //             .onfinish = function() {
-  //                 imgClone.remove();
-  //                 imgItem.style.transform = 'rotateY(0deg)';
-  //                 win.style.display = 'none';
-  //             };
+  console.log(tmpProducts); // Диапазон элементов, обрабатываемых методом some(), устанавливается до первого вызова функции callback. Элементы, добавленные в массив после начала выполнения метода some(), не будут посещены функцией callback. Если существующие элементы массива изменятся, значения, переданные в функцию callback, будут значениями на тот момент времени, когда метод some() посетит их; удалённые элементы посещены не будут.
+  // Пример: проверка значений элементов массива
+
+  function isBiggerThan10(element, index, array) {
+    return element > 10;
+  }
+
+  [2, 5, 8, 1, 4].some(isBiggerThan10); // false
+
+  [12, 5, 8, 1, 4].some(isBiggerThan10); // true
+  // Стрелочные функции предоставляют более краткий синтаксис для подобных проверок.
+
+  [2, 5, 8, 1, 4].some(function (elem) {
+    return elem > 10;
+  }); // false
+
+  [12, 5, 8, 1, 4].some(function (elem) {
+    return elem > 10;
+  }); // true
+  // if(tmpProducts.length > 0){
+  //   let exist = tmpProducts.some(elem => {
+  //     return elem.id === prod.id;
+  //   });
+  //   if(exist){
+  //     tmpProducts.forEach(elem => {
+  //         if(elem.id === prod.id){
+  //           elem.amount += 1;
   //         }
-  //     });
-  // });
-  // -------------------Step 2-------------------------------
-  // addToCarts.forEach(function(addToCart) {
-  //     addToCart.addEventListener('click', function() {
-  //     let prodItem = getProductItem(dataItem(this.closest('.card').querySelector('.win').getAttribute("productId")));
-  //     console.log(prodItem);
-  //     let imgItem = this.closest('.card').querySelector('img');
-  //     let win = this.closest('.card').querySelector('.win');
-  //     if (imgItem) {
-  //         let imgClone = imgItem.cloneNode(true);
-  //         imgClone.classList.add('offset-img');
-  //         document.body.appendChild(imgClone);
-  //         imgItem.style.transform = 'rotateY(180deg)';
-  //         win.style.display = 'block';
-  //         imgClone.animate([{
-  //             transform: _translate(imgItem)
-  //             },
-  //             {
-  //                 transform: _translate(document.querySelector('#sidebarCollapse'), 50) + 'perspective(500px) scale3d(0.1, 0.1, 0.2)'
-  //             },
-  //         ], {
-  //             duration: 2000,
-  //         })
-  //         .onfinish = function() {
-  //             imgClone.remove();
-  //             imgItem.style.transform = 'rotateY(0deg)';
-  //             win.style.display = 'none';
-  //         };
+  //     })
+  //   } else {
+  //     tmpProducts.push(new Product(prod.id,prod.name,prod.price,prod.picture,1));
+  //   }
+  // }
+  // else{
+  //   tmpProducts.push(new Product(prod.id,prod.name,prod.price,prod.picture,1));
+  // }
+  // window.localStorage.setItem("basket",JSON.stringify(tmpProducts));
+  // ================== Метод find ===========================
+  // Метод find() возвращает значение первого найденного в массиве элемента, которое удовлетворяет условию переданному в callback функции.  В противном случае возвращается undefined.
+  // Если вам нужно найти позицию элемента или наличие элемента в массиве, используйте Array.prototype.indexOf() или Array.prototype.includes() соответственно.
+  //arr.find(callback[, thisArg])
+  // Параметры
+  // callback - Функция, вызывающаяся для каждого значения в массиве, принимает три аргумента:
+  // element - Текущий обрабатываемый элемент в массиве.
+  // index - Индекс текущего обрабатываемого элемента в массиве.
+  // array - Массив, по которому осуществляется проход.
+  // thisArg - Необязательный параметр. Значение, используемое в качестве this при выполнении функции callback.
+  // Возвращаемое значение - Значение элемента из массива, если элемент прошёл проверку, иначе undefined.
+  // Метод find вызывает переданную функцию callback один раз для каждого элемента, присутствующего в массиве, до тех пор, пока она не вернёт true. Если такой элемент найден, метод find немедленно вернёт значение этого элемента. В противном случае, метод find вернёт undefined. До Firefox 34 функция callback не вызывалась для «дырок» в массивах (bug 1058394).
+  // Функция callback вызывается с тремя аргументами: значением элемента, индексом элемента и массивом, по которому осуществляется проход.
+  // Если в метод find был передан параметр thisArg, при вызове callback он будет использоваться в качестве значения this. В противном случае в качестве значения this будет использоваться значение undefined.
+  // Метод find не изменяет массив, для которого он был вызван.
+  // Диапазон элементов, обрабатываемых методом find, устанавливается до первого вызова функции callback. Элементы, добавленные в массив после начала выполнения метода find, не будут посещены функцией callback. Если существующие, непосещённые элементы массива изменяются функцией callback, их значения, переданные в функцию, будут значениями на тот момент времени когда метод find посетит их; удалённые элементы все еще будут посещены. 
+  // Пример: поиск простого числа в массиве
+  // Следующий пример находит в массиве положительных чисел элемент, являющийся простым числом (либо возвращает undefined, если в массиве нет простых чисел).
+  // function isPrime(element, index, array) {
+  //   var start = 2;
+  //   while (start <= Math.sqrt(element)) {
+  //     if (element % start++ < 1) {
+  //       return false;
   //     }
-  // });
-  // });
-  // ----------------------Step 3------------------------------
-  // addToCarts.forEach(function(addToCart) {
-  //     addToCart.addEventListener('click', function() {
-  //     saveCart(getProductItem(dataItem(this.closest('.card').querySelector('.win').getAttribute("productId"))));
-  //     let imgItem = this.closest('.card').querySelector('img');
-  //     let win = this.closest('.card').querySelector('.win');
-  //     if (imgItem) {
-  //         let imgClone = imgItem.cloneNode(true);
-  //         imgClone.classList.add('offset-img');
-  //         document.body.appendChild(imgClone);
-  //         imgItem.style.transform = 'rotateY(180deg)';
-  //         win.style.display = 'block';
-  //         imgClone.animate([{
-  //             transform: _translate(imgItem)
-  //             },
-  //             {
-  //                 transform: _translate(document.querySelector('#sidebarCollapse'), 50) + 'perspective(500px) scale3d(0.1, 0.1, 0.2)'
-  //             },
-  //         ], {
-  //             duration: 2000,
-  //         })
-  //         .onfinish = function() {
-  //             imgClone.remove();
-  //             imgItem.style.transform = 'rotateY(0deg)';
-  //             win.style.display = 'none';
-  //         };
-  //     }
-  // });
-  // });
-  // ---------------------Step 4-------------------------------
-
-  addToCarts.forEach(function (addToCart) {
-    addToCart.addEventListener('click', function () {
-      addProduct(getProductItem(dataItem(this.closest('.card').querySelector('.win').getAttribute("productId"))));
-      var imgItem = this.closest('.card').querySelector('img');
-      var win = this.closest('.card').querySelector('.win');
-
-      if (imgItem) {
-        var imgClone = imgItem.cloneNode(true);
-        imgClone.classList.add('offset-img');
-        document.body.appendChild(imgClone);
-        imgItem.style.transform = 'rotateY(180deg)';
-        win.style.display = 'block';
-
-        imgClone.animate([{
-          transform: _translate(imgItem)
-        }, {
-          transform: _translate(document.querySelector('#sidebarCollapse'), 50) + 'perspective(500px) scale3d(0.1, 0.1, 0.2)'
-        }], {
-          duration: 2000
-        }).onfinish = function () {
-          imgClone.remove();
-          imgItem.style.transform = 'rotateY(0deg)';
-          win.style.display = 'none';
-        };
-      }
-    });
-  }); // ---------------------Step 5-------------------------------
-  // document.querySelector('.cart-items').addEventListener(
-  //     'click',
-  //     function(e) {
-  //         if (e.target && e.target.matches('.remove-item')) {
-  //             let index = e.target.closest('.cart-item').getAttribute('id');
-  //             removeProduct(index);
-  //             e.target.parentNode.parentNode.remove();
-  //         }
-  //         if (e.target && e.target.matches('.plus')) {
-  //             let el = e.target;
-  //             let price = parseFloat(
-  //                 el.parentNode.nextElementSibling
-  //                     .querySelector('.item-price')
-  //                     .getAttribute('price')
-  //             );
-  //             let id = el.closest('.cart-item').getAttribute('id');
-  //             plusProduct(id);
-  //             let val = parseInt(el.previousElementSibling.innerText);
-  //             val = el.previousElementSibling.innerText = val + 1;
-  //             el.parentNode.nextElementSibling.querySelector(
-  //                 '.item-price'
-  //             ).innerText = parseFloat(price * val).toFixed(2);
-  //         }
-  //         if (e.target && e.target.matches('.minus')) {
-  //             let el = e.target;
-  //             let price = parseFloat(
-  //                 el.parentNode.nextElementSibling
-  //                     .querySelector('.item-price')
-  //                     .getAttribute('price')
-  //             );
-  //             let val = parseInt(el.nextElementSibling.innerText);
-  //             let id = el.closest('.cart-item').getAttribute('id');
-  //             if (val > 1) {
-  //                 minusProduct(id);
-  //                 val = el.nextElementSibling.innerText = val - 1;
-  //             }
-  //             el.parentNode.nextElementSibling.querySelector(
-  //                 '.item-price'
-  //             ).innerText = parseFloat(price * val).toFixed(2);
-  //         }
-  //     },
-  //     false
-  // );
-  // ---------------------Step 6-------------------------------
-
-  document.querySelector('.cart-items').addEventListener('click', function (e) {
-    if (e.target && e.target.matches('.remove-item')) {
-      var index = e.target.closest('.cart-item').getAttribute('id');
-      removeProduct(index);
-      e.target.parentNode.parentNode.remove();
-      updateTotal();
-    }
-
-    if (e.target && e.target.matches('.plus')) {
-      var _el = e.target;
-      var price = parseFloat(_el.parentNode.nextElementSibling.querySelector('.item-price').getAttribute('price'));
-
-      var id = _el.closest('.cart-item').getAttribute('id');
-
-      plusProduct(id);
-      var val = parseInt(_el.previousElementSibling.innerText);
-      val = _el.previousElementSibling.innerText = val + 1;
-      _el.parentNode.nextElementSibling.querySelector('.item-price').innerText = parseFloat(price * val).toFixed(2);
-      updateTotal();
-    }
-
-    if (e.target && e.target.matches('.minus')) {
-      var _el2 = e.target;
-
-      var _price = parseFloat(_el2.parentNode.nextElementSibling.querySelector('.item-price').getAttribute('price'));
-
-      var _val = parseInt(_el2.nextElementSibling.innerText);
-
-      var _id = _el2.closest('.cart-item').getAttribute('id');
-
-      if (_val > 1) {
-        minusProduct(_id);
-        _val = _el2.nextElementSibling.innerText = _val - 1;
-      }
-
-      _el2.parentNode.nextElementSibling.querySelector('.item-price').innerText = parseFloat(_price * _val).toFixed(2);
-      updateTotal();
-    }
-  }, false); // ------------------------View Details----------------------------
-
-  var viewDetails = document.querySelectorAll('.view-detail');
-  viewDetails.forEach(function (element) {
-    element.addEventListener('click', function () {
-      var dataId = this.closest('.col-md-4').getAttribute('productId');
-      carousel(_data.data[dataId]);
-    });
-  }); // ---------------------Step 7-------------------------------
-  // =================Очистка всего хранилища================
-
-  document.querySelector('.clear-cart').addEventListener('click', function () {
-    localStorage.removeItem('basket');
-    initStorage();
-    document.querySelector('.cart-items').innerHTML = '';
-    updateTotal();
-  });
-})(); //=====================================================
-},{"./data.js":"js/data.js"}],"js/index.js":[function(require,module,exports) {
+  //   }
+  //   return element > 1;
+  // }
+  // console.log([4, 6, 8, 12].find(isPrime)); // undefined, не найдено
+  // console.log([4, 5, 8, 12].find(isPrime)); // 5
+  // Метод indexOf() сравнивает искомый элемент searchElement с элементами в массиве, используя строгое сравнение (метод использует оператор ===, тройное равно).
+  // let index = e.target.closest('.cart-item').getAttribute('id');
+  // console.log('index= ', index);
+  // tmpProducts.splice(tmpProducts.indexOf(tmpProducts.find(x => x.id === +(index))), 1);
+})();
+},{}],"js/index.js":[function(require,module,exports) {
 "use strict";
 
 require("bootstrap");
 
-require("./app");
-},{"bootstrap":"../node_modules/bootstrap/dist/js/bootstrap.js","./app":"js/app.js"}],"../../../.nvm/versions/node/v12.9.1/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+require("./test");
+},{"bootstrap":"../node_modules/bootstrap/dist/js/bootstrap.js","./test":"js/test.js"}],"../../../.nvm/versions/node/v12.9.1/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -18607,7 +18303,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "45493" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "41909" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
